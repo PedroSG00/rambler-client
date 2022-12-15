@@ -3,7 +3,7 @@ import { useContext, useState } from 'react'
 import { Nav, Container, Navbar, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { NavDropdown } from 'react-bootstrap'
-import { MagnifyingGlass, PlusCircle, UserCircle } from "phosphor-react"
+import { MagnifyingGlass, PlusCircle, UserCircle, ChatTeardrop } from "phosphor-react"
 import logo from "./../../assets/logo.png"
 import { AuthContext } from '../../context/auth.context'
 import { MessageContext } from '../../context/userMessage.context'
@@ -51,7 +51,7 @@ const Navigation = () => {
 
     return (
         <>
-            <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+            <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className='navigation'>
                 <Container>
                     <Link to='/'>
                         <Navbar.Brand as='div'><img src={logo} className="app-logo"></img></Navbar.Brand>
@@ -61,6 +61,10 @@ const Navigation = () => {
                         <Nav className='ms-auto'>
                         </Nav>
                         <Nav>
+                            {user &&
+                                <Link to='/chats'>
+                                    <Nav.Link as='div' className='text-color'><ChatTeardrop size={32} /><span className="nav-title">Chats</span></Nav.Link>
+                                </Link>}
                             <Link to='/trip/search'>
                                 <Nav.Link as='div' className='text-color'><MagnifyingGlass size={28} /><span className="nav-title">Search Trips</span></Nav.Link>
                             </Link>

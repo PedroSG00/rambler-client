@@ -1,5 +1,5 @@
 import './Chat.css'
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useState, useContext, useRef } from "react"
 import chatService from "../../services/chat.service"
 import { SocketContext } from "../../context/socket.context"
 import socket from '../../config/socket.config'
@@ -15,16 +15,7 @@ const Chat = ({ chatId }) => {
     const { username } = user
     const [messages, setMessages] = useState([])
 
-    useEffect(() => {
 
-        chatService
-            .getChatDetails(chatId)
-            .then(({ data }) => {
-                console.log('-details-----------------------', data)
-                setMessages(data.messages)
-            })
-            .catch(error => console.log(error))
-    }, [])
 
 
     const sendMessage = async (newMessage, setNewMessage) => {
@@ -40,12 +31,13 @@ const Chat = ({ chatId }) => {
 
             }
 
-            await socket.emit("sendMessage", messageData)
+            socket.emit("sendMessage", messageData)
+
+            console.log(messageData)
 
             const { time, text, room } = messageData
 
             const response = await chatService.sendMessage(room, { time, text })
-
 
             setMessages(response.data.messages)
 
@@ -54,8 +46,16 @@ const Chat = ({ chatId }) => {
         }
     }
 
+    useEffect(() => {
 
-
+        chatService
+            .getChatDetails(chatId)
+            .then(({ data }) => {
+                console.log('-details-----------------------', data)
+                setMessages(data.messages)
+            })
+            .catch(error => console.log(error))
+    }, [chatId])
 
     useEffect(() => {
         connection.on('ConnectResponse', (payload) => { console.log('--------------', payload) })
@@ -63,21 +63,14 @@ const Chat = ({ chatId }) => {
 
 
 
-    console.log(messages)
-
     return (
         <div className="ChatView">
-            <Messages chatId={chatId} setMessages={setMessages} />
-            {messages.map(el => {
-                return (
-                    <>
-                        <p>{el.author.username}</p>
-                        <p>{el.text}</p>
-                    </>
-                )
-            })}
+            <div style={{ "maxHeight": "60vh", "overflow": "scroll", "overflowX": "hidden" }} className='mb-3 mt-3' >
+                <Messages chatId={chatId} setMessages={setMessages} messages={messages} />
+            </div>
+
             <ChatForm chatId={chatId} socket={socket} sendMessage={sendMessage} />
-        </div>
+        </div >
     )
 
 }

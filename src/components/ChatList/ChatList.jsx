@@ -1,3 +1,4 @@
+import './ChatList.css'
 import { SocketContext } from "../../context/socket.context"
 import { useContext } from 'react'
 
@@ -10,16 +11,16 @@ const ChatList = ({ chatList, setChatId }) => {
 
         chatList?.map(chat => {
 
-            const { trip } = chat
-            const { _id } = chat
+            const { trip, users, _id } = chat
+            console.log(users)
 
             return (
-                <div key={chat._id} className='chatWrapper' onClick={() => {
+                <div key={chat._id} className='chatWrapper mouse-over' onClick={() => {
                     setChatId(_id)
                     connection.emit('ConnectRequest', { room: _id })
-                }
-                } >
-                    <h3 className='chatTitle'> {trip.origin_address} - {trip.destination_address}</h3>
+                }} >
+                    <h5 className='chatTitle fw-bold'> {trip.origin_address} - {trip.destination_address}</h5>
+                    <ul className="d-flex list-style fw-semibolder">Members: {users.map((elm, i) => <li key={elm._id}>{i === users.length - 1 ? elm.username + '.' : elm.username + ','}</li>)}</ul>
 
                 </div>
             )

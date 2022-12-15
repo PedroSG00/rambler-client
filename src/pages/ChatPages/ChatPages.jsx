@@ -23,13 +23,15 @@ const ChatPage = () => {
         handleList()
     }, [])
 
+
+
     return (
         <Container>
-            <Row>
-                <Col md={6}>
+            <Row className='mt-5'>
+                <Col md={4}>
                     <ChatList setChatId={setChatId} chatList={chatList}></ChatList>
                 </Col>
-                <Col md={6}>
+                <Col md={8}>
                     {chatId !== '' && <Chat chatId={chatId} />}
                 </Col>
             </Row>
