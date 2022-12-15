@@ -1,18 +1,37 @@
 import './Messages.css'
 import { AuthContext } from '../../context/auth.context'
-import { useContext } from 'react'
+import { useContext, useEffect, useRef } from 'react'
+import socket from '../../config/socket.config'
 
 
 
-const Messages = ({ messages }) => {
+const Messages = ({ messages, setMessages }) => {
 
-    const messagePosition = 'justify-content-end'
     const { user } = useContext(AuthContext)
     const { _id: user_id } = user
 
+    useEffect(() => {
+        socket.on("receiveMessage", (data) => {
+            console.log(data)
+            setMessages((list) => [...list, data])
+        })
+    }, [socket])
+
+    const messageEl = useRef(null);
+
+    useEffect(() => {
+        if (messageEl) {
+            messageEl.current.addEventListener('DOMNodeInsertedIntoDocument', event => {
+                const { currentTarget: target } = event;
+                console.log(target.scroll)
+                target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
+            });
+        }
+    }, [])
 
     return (
-        <div>
+
+        <div ref={messageEl} >
             {
                 messages.map(el => {
                     return (
@@ -29,7 +48,6 @@ const Messages = ({ messages }) => {
             }
         </div >
     )
-
 }
 
 export default Messages

@@ -41,15 +41,15 @@ function AuthProviderWrapper(props) {
         authenticateUser()
     }, [])
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (user) {
-            setConnection(socket.connect())
-        } else {
-            setConnection(socket.disconnect())
-        }
+    //     if (user) {
+    //         setConnection(socket.connect())
+    //     } else {
+    //         setConnection(socket.disconnect())
+    //     }
 
-    }, [user])
+    // }, [user])
 
 
     return (

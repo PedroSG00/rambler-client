@@ -38,14 +38,14 @@ const ProfilePage = () => {
                     <Col md={6}>
                         <h2 className='text-center'>My trips</h2>
                         <hr />
-                        <div style={{ "maxHeight": "85vh", "overflow": "scroll" }}>
+                        <div style={{ "maxHeight": "85vh", "overflow": "scroll", "overflowX": "hidden" }}>
                             {<TripList trips={trips} loadTrips={() => { }} loadOwnTrips={loadOwnTrips} />}
                         </div>
                     </Col>
                     <Col md={6}>
                         <h2 className='text-center'>My cars</h2>
                         <hr />
-                        <div style={{ "maxHeight": "85vh", "overflow": "scroll" }} >
+                        <div style={{ "maxHeight": "85vh", "overflow": "scroll", "overflowX": "hidden" }} >
                             <CarList />
 
                         </div>

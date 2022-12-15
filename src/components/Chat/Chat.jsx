@@ -1,5 +1,5 @@
 import './Chat.css'
-import { useEffect, useState, useContext, useRef } from "react"
+import { useEffect, useState, useContext } from "react"
 import chatService from "../../services/chat.service"
 import { SocketContext } from "../../context/socket.context"
 import socket from '../../config/socket.config'
@@ -16,6 +16,16 @@ const Chat = ({ chatId }) => {
     const [messages, setMessages] = useState([])
 
 
+    useEffect(() => {
+
+        chatService
+            .getChatDetails(chatId)
+            .then(({ data }) => {
+                console.log('-details-----------------------', data)
+                setMessages(data.messages)
+            })
+            .catch(error => console.log(error))
+    }, [])
 
 
     const sendMessage = async (newMessage, setNewMessage) => {
@@ -47,21 +57,11 @@ const Chat = ({ chatId }) => {
     }
 
     useEffect(() => {
-
-        chatService
-            .getChatDetails(chatId)
-            .then(({ data }) => {
-                console.log('-details-----------------------', data)
-                setMessages(data.messages)
-            })
-            .catch(error => console.log(error))
-    }, [chatId])
-
-    useEffect(() => {
+        console.log('conectando...')
         connection.on('ConnectResponse', (payload) => { console.log('--------------', payload) })
     }, [connection])
 
-
+    console.log('connection--------------------------', connection)
 
     return (
         <div className="ChatView">

@@ -5,9 +5,7 @@
 }
 
 .owner-chat {
-    position: relative;
-    max-width: fit-content;
-    max-width: 80%;
+    box-sizing: border-box;
     background-color: #f1d92167;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
@@ -22,6 +20,6 @@
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    block-size: fit-content;
+    box-sizing: border-box;
     padding: 10px;
 }
