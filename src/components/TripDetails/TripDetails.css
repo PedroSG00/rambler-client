@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+* {
+    font-family: 'Lato', sans-serif !important;
+    margin: 0;
+    padding: 0;
+}
+
+
+.tripDetails {
+    text-align: center;
+}
+
+.title-wrapper>p {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.title {
+    font-size: 20px;
+}
+
+.wrapper {
+    width: 90%;
+    padding: 0 1rem;
+}
+
+.wrapper>p {
+    display: flex;
+    justify-content: space-between;
+}
+
+.hour-title {
+    text-align: center;
+}
+
+.car-details {
+    display: flex;
+    justify-content: end;
+    width: 50%;
+}
+
+.car-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    padding: 0 1rem;
+}
+
+.passengers-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cool-button {
+    outline: 0 !important;
+    border: 0 !important;
+    cursor: pointer;
+    background-color: white !important;
+    border-radius: 4px !important;
+    padding: 4px 8px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #d5bf1c !important;
+    border: 1px solid #d5bf1c !important;
+    line-height: 26px !important;
+}
+
+.map-button {
+    position: relative;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    outline: 0 !important;
+    border: 0 !important;
+    cursor: pointer;
+    background-color: white !important;
+    border-radius: 4px !important;
+    padding: 4px 8px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #d5bf1c !important;
+    border: 1px solid #d5bf1c !important;
+    line-height: 26px !important;
+}

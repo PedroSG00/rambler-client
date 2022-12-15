@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+* {
+    font-family: 'Lato', sans-serif !important;
+}
+
+.text-color {
+    color: #d5bf1c !important;
+    font-weight: 700 !important;
+
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.app-logo {
+    padding: 0 !important;
+    width: 160px;
+
+}
+
+.nav-title {
+    margin-left: 10px !important;
+    line-height: 28px !important;
+    vertical-align: middle !important;
+}

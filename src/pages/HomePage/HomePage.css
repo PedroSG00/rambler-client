@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+* {
+    font-family: 'Lato', sans-serif !important;
+}
+
+#video {
+    height: 87vh;
+    width: 100%;
+    object-fit: cover;
+    z-index: -1;
+
+}
+
+.search-bar {
+    position: absolute;
+    top: 50%;
+}

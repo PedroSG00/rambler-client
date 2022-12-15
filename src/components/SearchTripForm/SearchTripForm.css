@@ -1,0 +1,38 @@
+.bg-color {
+    background-color: #d5bf1c !important;
+    border: none;
+}
+
+button {
+    background-color: #d5bf1c !important;
+    color: white !important;
+}
+
+input[type="date"]::before {
+    color: #75797D;
+    content: attr(placeholder);
+}
+
+input[type="date"] {
+    color: #ffffff;
+}
+
+input[type="date"]:focus,
+input[type="date"]:valid {
+    color: #75797D;
+}
+
+input[type="date"]:focus::before,
+input[type="date"]:valid::before {
+    content: "" !important;
+}
+
+.input-group-start {
+    border-top-left-radius: 100px !important;
+    border-bottom-left-radius: 100px !important;
+}
+
+.input-group-end {
+    border-top-right-radius: 100px !important;
+    border-bottom-right-radius: 100px !important;
+}

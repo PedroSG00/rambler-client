@@ -1,0 +1,9 @@
+.map-style {
+    width: 100%;
+    height: 200px;
+}
+
+.AddTrip {
+    padding: 1.5rem 0;
+    height: 87vh !important;
+}
