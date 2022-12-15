@@ -1,15 +1,18 @@
 import './TripDetailsPage.css'
 import { Row, Col, Container } from 'react-bootstrap'
+import { useParams } from 'react-router-dom'
 import TripDetails from '../../components/TripDetails/TripDetails'
 
 
 const TripDetailsPage = () => {
 
+    const { trip_id } = useParams()
+
     return (
         <div className='ProfilePage'>
-            <Container className='mt-5'>
+            <Container>
                 <Row className='justify-content-around'>
-                    <TripDetails />
+                    <TripDetails trip_id={trip_id} />
                 </Row>
             </Container>
 

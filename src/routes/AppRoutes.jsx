@@ -13,9 +13,9 @@ const AppRoutes = () => {
     return (
         <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path='/trip/:trip_id' element={<TripDetailsPage />} />
             <Route path="/trip/add" element={<AddTripPage />} />
             <Route path='/trip/search' element={<SearchTripPage />} />
-            <Route path='/trip/:trip_id' element={<TripDetailsPage />} />
             <Route element={<PrivateRoute />}>
                 <Route path="/chats" element={<ChatPage />}></Route>
                 <Route path="/user/profile" element={<ProfilePage />} />
