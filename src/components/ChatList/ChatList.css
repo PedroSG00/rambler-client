@@ -1,0 +1,16 @@
+.list-style li {
+    list-style: none;
+    margin-left: 5px;
+}
+
+.mouse-over {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 20px;
+    transition: background-color 0.5s ease-out 100ms;
+}
+
+.mouse-over:hover {
+    background-color: #d5bf1c7c;
+}

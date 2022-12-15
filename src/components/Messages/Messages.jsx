@@ -1,63 +1,38 @@
-import { useState, useEffect } from "react"
-import { Button } from 'react-bootstrap';
-import { Link } from "react-router-dom";
-import socket from "../../config/socket.config";
-import chatService from "../../services/chat.service"
-
-const Messages = ({ chatId, setMessages }) => {
+import './Messages.css'
+import { AuthContext } from '../../context/auth.context'
+import { useContext } from 'react'
 
 
-    const [currentMessageList, setCurrentMessageList] = useState([])
-    const [messageList, setMessageList] = useState({})
 
-    useEffect(() => {
-        socket.on("receiveMessage", (data) => {
-            console.log(data)
-            setMessages((list) => [...list, data])
-        })
-    }, [socket])
+const Messages = ({ messages }) => {
 
-    // useEffect(() => {
+    const messagePosition = 'justify-content-end'
+    const { user } = useContext(AuthContext)
+    const { _id: user_id } = user
 
-    //     chatService
-    //         .getChatDetails(chatId)
-    //         .then(({ data }) => {
-    //             setMessageList(data)
-    //         })
-    //         .catch(error => console.log(error))
-
-    // }, [])
-
-    // console.log(messageList.messages)
 
     return (
-        <p>JUST CHATTING</p>
-
-        // <div>
-        //     {
-        //         messageList?.messages?.map((elm) => {
-        //             return (
-        //                 <div key={elm._id}>
-        //                     <h1>{elm?.author?.username}</h1>
-        //                 </div>
-        //             )
-
-        //         })
-        //     }
-        //     {
-        //         currentMessageList.map(({ author, message, time }, i) => {
-        //             return (<div key={i}>
-        //                 <h1>{author}</h1>
-        //                 <p>{message}</p>
-        //                 <p>{time}</p>
-        //             </div>)
-
-
-        //         })
-        //     }
-        // </div>
+        <div>
+            {
+                messages.map(el => {
+                    return (
+                        <div key={el._id} className={`chat d-flex m-4 ${el.author._id === user_id ? 'text-end justify-content-end owner-chat' : 'text-start justify-content-start others-chat'} align-items-center`} >
+                            <div className='d-flex flex-column'>
+                                <div className={`name fw-bold ${el.author._id === user_id ? 'text-end' : 'text-start text-white'} `}>{el.author.username}</div>
+                                <div className={`text fw-semibold mt-1 mb-1 ${el.author._id === user_id ? 'text-end' : 'text-start text-white'}`}>{el.text}</div>
+                                <div className={`time fw-lighter text-secondary ${el.author._id === user_id ? 'text-end' : 'text-start text-white'}`}>{el.time}</div>
+                            </div>
+                            < img src={el.author.imageUrl} alt="User name" className={`profile-image ${el.author._id === user_id ? 'order-last ms-3' : 'order-first me-3'}`} />
+                        </div >
+                    )
+                })
+            }
+        </div >
     )
 
 }
 
 export default Messages
+
+
+

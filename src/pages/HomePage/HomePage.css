@@ -5,7 +5,7 @@
 }
 
 #video {
-    height: 87vh;
+    height: 85vh;
     width: 100%;
     object-fit: cover;
     z-index: -1;
