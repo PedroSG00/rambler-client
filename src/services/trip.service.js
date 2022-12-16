@@ -33,6 +33,8 @@ class TripService {
 
     acceptRequest = (tripID, data) => this.api.post(`/${tripID}/accept`, data)
 
+    declineRequest = (tripID, data) => this.api.post(`/${tripID}/decline`, data)
+
     editTrip = (tripID, tripData) => this.api.put(`/${tripID}/edit`, tripData)
 
     deleteTrip = (tripID) => this.api.delete(`/${tripID}/delete`)
