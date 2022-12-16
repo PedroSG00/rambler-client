@@ -91,3 +91,38 @@
     border: 1px solid #d5bf1c !important;
     line-height: 26px !important;
 }
+
+.request-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.request-wrapper {
+    padding: 2rem 1.5rem;
+    margin-top: 1rem;
+    width: 60%;
+    border: 1px solid #d5bf1c;
+    border-radius: 10px;
+}
+
+.request-btn {
+    outline: 0 !important;
+    border: 0 !important;
+    cursor: pointer;
+    background-color: white !important;
+    border-radius: 4px !important;
+    padding: 4px 8px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #d5bf1c !important;
+    border: 1px solid #d5bf1c !important;
+    line-height: 26px !important;
+
+}
+
+.requests-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -19,7 +19,7 @@ const AddTripForm = ({ handleMarkers, tripPrice }) => {
     const [showModal, setShowModal] = useState(false)
     const [userCars, setUserCars] = useState([])
     const { setShowToast, setToastMessage } = useContext(MessageContext)
-    const { isLoaded } = useContext(MapContext)
+    const { isLoaded, setMap } = useContext(MapContext)
     const navigate = useNavigate()
     const [errors, setErrors] = useState([])
     const [getHour, setGetHour] = useState('10:00');
@@ -51,6 +51,7 @@ const AddTripForm = ({ handleMarkers, tripPrice }) => {
 
     useEffect(() => {
         handleUserDetails()
+        return setMap(null)
     }, [])
 
     const closeModal = () => setShowModal(false)

@@ -31,6 +31,8 @@ class TripService {
 
     requestWaypoint = (tripID, data) => this.api.post(`/${tripID}/request`, data)
 
+    acceptRequest = (tripID, data) => this.api.post(`/${tripID}/accept`, data)
+
     editTrip = (tripID, tripData) => this.api.put(`/${tripID}/edit`, tripData)
 
     deleteTrip = (tripID) => this.api.delete(`/${tripID}/delete`)

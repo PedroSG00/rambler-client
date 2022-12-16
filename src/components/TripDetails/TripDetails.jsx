@@ -1,6 +1,7 @@
 import './TripDetails.css'
 import { useState, useEffect, useCallback, useContext } from 'react'
 import { Button, Col, Modal } from 'react-bootstrap'
+import { CheckCircle, XCircle } from 'phosphor-react'
 import { GoogleMap, DirectionsRenderer } from '@react-google-maps/api'
 import mapStyles from '../../const/MapsStyles'
 import Loader from '../Loader/Loader'
@@ -23,79 +24,92 @@ const TripDetails = ({ trip_id }) => {
         location: {},
         waypoint_address: ''
     })
-
     const onLoad = useCallback((map) => {
         setMap(map)
     }, [])
 
-    const closeModal = () => setShowModal(false)
 
+    const closeModal = () => setShowModal(false)
     useEffect(() => {
         loadTripDetails(trip_id)
-    }, [])
-
+    }, [map, route])
     const loadTripDetails = (id) => {
-
         tripService
             .getTripDetails(id)
             .then(({ data }) => setTrip(data))
             .catch(err => console.log(err))
     }
-
     const joinTrip = () => {
-
         tripService
             .joinTrip(trip_id)
             .then(res => loadTripDetails(trip_id))
             .catch(err => console.log(err))
     }
-
     const leaveTrip = () => {
-
         tripService
             .leaveTrip(trip_id)
             .then(res => loadTripDetails(trip_id))
             .catch(err => console.log(err))
     }
-
-    const { from, to, origin_address, destination_address, owner, passengers, requests, date, _id, car, seats, hour, price, chat } = trip
-
+    const { from, to, origin_address, destination_address, owner, passengers, requests, date, _id, car, seats, hour, price, chat, waypoints } = trip
     const passengersId = passengers?.map(elm => elm._id)
-
     const navigateTo = () => {
         navigate(`/chat/${chat}`)
     }
-
     const mapOptions = {
         styles: mapStyles,
         fullscreenControl: false,
         mapTypeControl: false,
         streetViewControl: false,
-
     }
     const calculateRoute = async (from, to) => {
-
         const directionService = new window.google.maps.DirectionsService()
-        const route = await directionService.route({
-            origin: { lat: from.coordinates[1], lng: from.coordinates[0] },
-            destination: { lat: to.coordinates[1], lng: to.coordinates[0] },
-            travelMode: window.google.maps.TravelMode.DRIVING
-        })
-        setRoute(route)
+
+
+        if (waypoints.length > 0) {
+            const coordinates = waypoints.map(waypoint => {
+                return { location: { lat: waypoint.coordinates[1], lng: waypoint.coordinates[0] }, stopover: true }
+            })
+            console.log(coordinates)
+            const route = await directionService.route({
+                origin: { lat: from?.coordinates[1], lng: from?.coordinates[0] },
+                destination: { lat: to?.coordinates[1], lng: to?.coordinates[0] },
+                waypoints: coordinates,
+                optimizeWaypoints: true,
+                travelMode: window.google.maps.TravelMode.DRIVING
+            })
+
+            setRoute(route)
+
+        } else {
+            const route = await directionService.route({
+                origin: { lat: from?.coordinates[1], lng: from?.coordinates[0] },
+                destination: { lat: to?.coordinates[1], lng: to?.coordinates[0] },
+                travelMode: window.google.maps.TravelMode.DRIVING
+            })
+            setRoute(route)
+        }
+
+
     }
-
     const sendRequest = (id) => {
-
         tripService
             .requestWaypoint(id, request)
             .then(({ data }) => {
                 console.log(data)
             }).catch(err => console.log(err))
-
     }
-
     const handleRequest = (value, { lat, lng }) => {
         setRequest({ ...request, owner: user._id, location: { lat, lng }, waypoint_address: value })
+    }
+
+    const acceptRequest = (id, request) => {
+        tripService
+            .acceptRequest(id, request)
+            .then(({ data }) => {
+                setTrip(data)
+                calculateRoute(data.from, data.to)
+            }).catch(err => console.log(err))
     }
 
     useEffect(() => {
@@ -107,11 +121,8 @@ const TripDetails = ({ trip_id }) => {
             calculateRoute(from, to)
         }
         return setMap(null)
-    }, [map])
-
+    }, [map, trip])
     if (!isLoaded) return <Loader />
-
-
     return (
         <>
             {
@@ -158,19 +169,15 @@ const TripDetails = ({ trip_id }) => {
                                 <button className='cool-button' onClick={navigateTo}>Join Chat</button>
                             </>)}
                         </div>
-
                     </Col>
                     <Col md={6}>
                         <button className='map-button' onClick={() => setShowModal(true)}>Waypoint Request</button>
                         <GoogleMap zoom={14} options={mapOptions} onLoad={onLoad} mapContainerStyle={{ width: "100%", height: "90%", borderRadius: "10px" }} >
                             <>
-
                                 {route && <DirectionsRenderer directions={route} />}
-
                             </>
                         </GoogleMap>
                     </Col>
-
                     <Modal show={showModal} onHide={closeModal} centered>
                         <Modal.Header className="text-center" closeButton>
                             <Modal.Title>Make a waypoint request</Modal.Title>
@@ -188,15 +195,36 @@ const TripDetails = ({ trip_id }) => {
                             </button>
                         </Modal.Footer>
                     </Modal>
-                    <hr className='hr mt-5'></hr>
-                    <h3 className='dialog-3'>Received requests</h3>
+
+                    {user._id === owner._id &&
+                        <>
+                            < hr className='hr mt-5'></hr>
+                            <h3 className='dialog-3'>Received requests</h3>
+
+                            <div className='requests-wrapper'>
+                                {
+                                    requests.map((request, i) => {
+                                        console.log(request)
+                                        return (
+                                            <div key={i} className='request-wrapper'>
+                                                <p><img className='request-img' src={request.owner.imageUrl}></img></p>
+                                                <p><span> {request.owner.username} has make you a request to make a stop in {request.waypoint_address}
+                                                </span><span><button onClick={() => acceptRequest(_id, request)} className='request-btn'><CheckCircle size={22}></CheckCircle> Accept</button></span>
+                                                    <span><button className='request-btn'><XCircle size={22}></XCircle> Decline</button></span></p>
+                                            </div>
+                                        )
+                                    })
+                                }
+
+
+                            </div>
+
+                        </>
+                    }
 
                 </>
             }
-
         </>
-
     )
 }
-
 export default TripDetails

@@ -12,18 +12,18 @@ import { SocketProvider } from './context/socket.context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <React.StrictMode>
-  <SocketProvider>
-    <AuthProviderWrapper>
-      <MapProvider>
-        <MessageProviderWrapper>
-          <Router>
-            <App />
-          </Router>
-        </MessageProviderWrapper>
-      </MapProvider>
-    </AuthProviderWrapper>
-  </SocketProvider>
-  // </React.StrictMode >
+  <React.StrictMode>
+    <SocketProvider>
+      <AuthProviderWrapper>
+        <MapProvider>
+          <MessageProviderWrapper>
+            <Router>
+              <App />
+            </Router>
+          </MessageProviderWrapper>
+        </MapProvider>
+      </AuthProviderWrapper>
+    </SocketProvider>
+  </React.StrictMode >
 )
 
