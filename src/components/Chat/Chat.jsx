@@ -48,7 +48,7 @@ const Chat = ({ chatId }) => {
 
             socket.emit("sendMessage", messageData)
 
-            console.log(messageData)
+            console.log('eeeeeeeeeeeeeeeeeee', messageData)
 
             const { time, text, room } = messageData
 
@@ -82,4 +82,3 @@ const Chat = ({ chatId }) => {
 }
 
 export default Chat
-

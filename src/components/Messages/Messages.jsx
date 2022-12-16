@@ -1,10 +1,7 @@
 import './Messages.css'
 import { AuthContext } from '../../context/auth.context'
-import { useContext, useEffect, useRef } from 'react'
+import { useContext, useEffect } from 'react'
 import socket from '../../config/socket.config'
-import chatService from '../../services/chat.service'
-import { Button } from 'react-bootstrap'
-
 
 
 const Messages = ({ messages, setMessages }) => {
@@ -18,7 +15,6 @@ const Messages = ({ messages, setMessages }) => {
             setMessages((list) => [...list, data])
         })
     }, [socket])
-
 
     return (
 
@@ -40,6 +36,5 @@ const Messages = ({ messages, setMessages }) => {
         </div >
     )
 }
+
 export default Messages
-
-
