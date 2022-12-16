@@ -160,7 +160,7 @@ const TripDetails = ({ trip_id }) => {
                         </div>
                         <hr className='hr'></hr>
                         <div className='car-wrapper'>
-                            <p><span>Car:</span></p><p className='car-details'><span >{car.make}</span><span style={{ marginRight: 5 }}>{car.model}</span><Button style={{ backgroundColor: `${car.color}`, height: 20, width: 40 }}></Button> </p>
+                            <p><span>Car:</span></p><p className='car-details'><span >{car.make}</span><span style={{ marginRight: 5 }}>{car.model}</span><Button as='div' style={{ backgroundColor: `${car.color}`, height: 20, width: 40 }}></Button> </p>
                         </div>
                         <hr className='hr'></hr>
                         <div className='wrapper'>
