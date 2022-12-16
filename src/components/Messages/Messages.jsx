@@ -42,6 +42,3 @@ const Messages = ({ messages, setMessages }) => {
 }
 
 export default Messages
-
-
-
