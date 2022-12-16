@@ -5,8 +5,8 @@
 }
 
 .owner-chat {
-    box-sizing: border-box;
-    background-color: #f1d92167;
+    align-self: flex-end;
+    background-color: #f9dc0342;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -16,6 +16,7 @@
 
 
 .others-chat {
+    align-self: flex-start;
     background-color: #d5bf1ca2;
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;

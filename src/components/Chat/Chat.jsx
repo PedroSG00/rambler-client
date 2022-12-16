@@ -1,5 +1,5 @@
 import './Chat.css'
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useState, useContext, useRef } from "react"
 import chatService from "../../services/chat.service"
 import { SocketContext } from "../../context/socket.context"
 import socket from '../../config/socket.config'
@@ -14,6 +14,7 @@ const Chat = ({ chatId }) => {
     const { user } = useContext(AuthContext)
     const { username } = user
     const [messages, setMessages] = useState([])
+    const elm = useRef(null)
 
 
     useEffect(() => {
@@ -25,7 +26,11 @@ const Chat = ({ chatId }) => {
                 setMessages(data.messages)
             })
             .catch(error => console.log(error))
-    }, [])
+    }, [chatId])
+
+    useEffect(() => {
+        elm.current.scrollIntoView({ behavior: "smooth" })
+    }, [messages])
 
 
     const sendMessage = async (newMessage, setNewMessage) => {
@@ -67,6 +72,7 @@ const Chat = ({ chatId }) => {
         <div className="ChatView">
             <div style={{ "maxHeight": "60vh", "overflow": "scroll", "overflowX": "hidden" }} className='mb-3 mt-3' >
                 <Messages chatId={chatId} setMessages={setMessages} messages={messages} />
+                <div ref={elm} />
             </div>
 
             <ChatForm chatId={chatId} socket={socket} sendMessage={sendMessage} />

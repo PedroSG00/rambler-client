@@ -3,6 +3,7 @@
 }
 
 .loader {
+    margin-top: 150px;
     width: calc(100px - 24px);
     height: 50px;
     position: relative;
@@ -13,9 +14,9 @@
     content: "";
     position: absolute;
     inset: 0;
-    margin: auto;
-    width: 20px;
-    height: 20px;
+    margin: 100;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     background: #d5bf1c;
     transform-origin: -24px 50%;
@@ -29,8 +30,8 @@
     top: 50%;
     transform: translate(-50%, -50%);
     background: #d5bf1c;
-    width: 48px;
-    height: 48px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
 }
 

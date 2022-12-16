@@ -32,10 +32,10 @@ const ChatPage = () => {
                     <ChatList setChatId={setChatId} chatList={chatList}></ChatList>
                 </Col>
                 <Col md={8}>
-                    {chatId !== '' ? <Chat chatId={chatId} /> : <span className="loader text-center"></span>}
+                    {chatId !== '' ? <Chat chatId={chatId} /> : <Col md={{ span: 4, offset: 4 }} className='d-flex align-items-center justify-content-center mt-5' > <span className="loader"></span> </Col>}
                 </Col>
             </Row>
-        </Container>
+        </Container >
 
     )
 }
