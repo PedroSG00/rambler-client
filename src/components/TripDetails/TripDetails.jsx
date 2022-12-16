@@ -12,6 +12,7 @@ import { ArrowRight } from "phosphor-react"
 import calculateRealDate from '../../utils/caculateDate'
 import { MapContext } from '../../context/map.context'
 import PlacesAutocomplete from '../Autocomplete/Autocomplete'
+
 const TripDetails = ({ trip_id }) => {
     const { user } = useContext(AuthContext)
     const [trip, setTrip] = useState({})
@@ -54,7 +55,7 @@ const TripDetails = ({ trip_id }) => {
     const { from, to, origin_address, destination_address, owner, passengers, requests, date, _id, car, seats, hour, price, chat, waypoints } = trip
     const passengersId = passengers?.map(elm => elm._id)
     const navigateTo = () => {
-        navigate(`/chat/${chat}`)
+        navigate(`/chats`)
     }
     const mapOptions = {
         styles: mapStyles,
@@ -165,9 +166,15 @@ const TripDetails = ({ trip_id }) => {
                                         : <button onClick={joinTrip} className='cool-button'>Join Trip</button>
                                     }
                                 </span>)}
-                            {user && (owner._id === user._id || passengersId?.includes(user._id) && <>
+                            {user && (passengersId?.includes(user._id)
+                                &&
+                                <>
+                                    <button className='cool-button' onClick={navigateTo}>Join Chat</button>
+                                </>)}
+
+                            {owner._id === user._id && <>
                                 <button className='cool-button' onClick={navigateTo}>Join Chat</button>
-                            </>)}
+                            </>}
                         </div>
                     </Col>
                     <Col md={6}>

@@ -24,6 +24,7 @@ class ChatService {
 
     sendMessage = (chat_id, body) => this.api.put(`/${chat_id}/send`, body)
 
+    deleteMessage = (chat_id) => this.api.delete(`/${chat_id}/delete`)
 
 }
 

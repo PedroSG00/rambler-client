@@ -26,16 +26,16 @@ const ChatPage = () => {
 
 
     return (
-        <Container>
+        <Container className='ChatPage' >
             <Row className='mt-5'>
                 <Col md={4}>
                     <ChatList setChatId={setChatId} chatList={chatList}></ChatList>
                 </Col>
                 <Col md={8}>
-                    {chatId !== '' && <Chat chatId={chatId} />}
+                    {chatId !== '' ? <Chat chatId={chatId} /> : <Col md={{ span: 4, offset: 4 }} className='d-flex align-items-center justify-content-center mt-5' > <span className="loader"></span> </Col>}
                 </Col>
             </Row>
-        </Container>
+        </Container >
 
     )
 }
