@@ -69,7 +69,7 @@ const TripDetails = ({ trip_id }) => {
     const { from, to, origin_address, destination_address, owner, passengers, requests, date, _id, car, seats, hour, price, chat, waypoints } = trip
     const passengersId = passengers?.map(elm => elm._id)
     const navigateTo = () => {
-        navigate(`/chat`)
+        navigate(`/chats`)
     }
     const mapOptions = {
         styles: mapStyles,
