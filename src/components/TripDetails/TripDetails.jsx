@@ -161,9 +161,9 @@ const TripDetails = ({ trip_id }) => {
                                     <button className='cool-button' onClick={navigateTo}>Join Chat</button>
                                 </>)}
 
-                            {user && (owner._id === user._id && <>
+                            {owner._id === user._id && <>
                                 <button className='cool-button' onClick={navigateTo}>Join Chat</button>
-                            </>)}
+                            </>}
                         </div>
 
                     </Col>
