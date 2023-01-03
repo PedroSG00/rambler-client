@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useContext, useState } from 'react';
 import { Button, Card, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
@@ -9,7 +8,7 @@ import { useLocation } from 'react-router-dom'
 import { MessageContext } from "../../context/userMessage.context"
 
 
-const TripCard = ({ origin_address, destination_address, owner, _id: trip_id, searchTrips, loadOwnTrips }) => {
+const TripCard = ({ origin_address, destination_address, owner, _id: trip_id, searchTrips, loadOwnTrips, newEventKey }) => {
 
     const { setShowToast, setToastMessage } = useContext(MessageContext)
 
@@ -23,14 +22,20 @@ const TripCard = ({ origin_address, destination_address, owner, _id: trip_id, se
         setShowModal(false)
     }
     const [value, setValue] = useState('')
-    const [trip_state, setTripState] = useState('')
+
+    const [trip_state, setTripState] = useState({
+        trip_state: 'OPEN'
+    })
+
+
 
     const handleValue = e => {
         if (e.target.value === 'edit') {
             setShowModal(true)
             setValue('edit')
         } else if (e.target.value === 'COMPLETED') {
-            setTripState('COMPLETED')
+            const { name, value } = e.target
+            setTripState({ [name]: value })
             updateTripState()
             loadOwnTrips()
         } else {
@@ -74,9 +79,14 @@ const TripCard = ({ origin_address, destination_address, owner, _id: trip_id, se
                         <Button className='me-2'>Show Details</Button>
                     </Link>
                     {user && ((owner._id === user._id && location.pathname !== '/trips/list' && location.pathname !== `/trips/${trip_id}`) && <>
-                        <Button value='COMPLETED' onClick={handleValue} className='me-2'>Complete trip</Button>
-                        <Button value='edit' onClick={handleValue} className='me-2'>Edit Trip</Button>
-                        <Button value='delete' onClick={handleValue} className='me-2'>Delete trip</Button>
+                        <>
+                            {newEventKey !== 'Trip History' && <>
+                                <Button value='COMPLETED' name='trip_state' onClick={handleValue} className='me-2'>Complete trip</Button>
+                                <Button value='edit' onClick={handleValue} className='me-2'>Edit Trip</Button>
+                                <Button value='delete' onClick={handleValue} className='me-2'>Delete trip</Button>
+                            </>
+                            }
+                        </>
                     </>)}
                 </Card.Body>
             </Card>

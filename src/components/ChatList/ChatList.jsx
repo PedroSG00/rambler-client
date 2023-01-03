@@ -8,30 +8,33 @@ const ChatList = ({ chatList, setChatId }) => {
 
 
     return (
-        <>
+        <div>
             <h3>My chat list</h3>
 
+            <div style={{ "maxHeight": "66vh", "overflow": "scroll", "overflowX": "hidden" }}>
+                {chatList?.map(chat => {
 
+                    const { trip, users, _id, driver } = chat
+                    console.log(users)
 
-            {chatList?.map(chat => {
+                    return (
 
-                const { trip, users, _id, driver } = chat
-                console.log(users)
+                        <div key={chat._id} className='chatWrapper mouse-over' onClick={() => {
+                            setChatId(_id)
+                            connection.emit('ConnectRequest', { room: _id })
+                        }} >
+                            <h5 className='chatTitle fw-bold'> {trip?.origin_address} - {trip?.destination_address}</h5>
+                            <ul className="d-flex list-style fw-semibolder flex-wrap">Members: {users.map((elm, i) => <li key={elm._id}>{i === users.length - 1 ? elm.username + '.' : elm.username + ','}</li>)}</ul>
 
-                return (
+                        </div>
+                    )
+                })}
+            </div>
 
-                    <div key={chat._id} className='chatWrapper mouse-over' onClick={() => {
-                        setChatId(_id)
-                        connection.emit('ConnectRequest', { room: _id })
-                    }} >
-                        <h5 className='chatTitle fw-bold'> {trip?.origin_address} - {trip?.destination_address}</h5>
-                        <ul className="d-flex list-style fw-semibolder flex-wrap">Members: {users.map((elm, i) => <li key={elm._id}>{i === users.length - 1 ? elm.username + '.' : elm.username + ','}</li>)}</ul>
-
-                    </div>
-                )
-            })}
-        </>
+        </ div>
     )
 }
 
 export default ChatList
+
+
