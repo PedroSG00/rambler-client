@@ -9,7 +9,7 @@ const TripList = ({ trips, loadOwnTrips, searchTrips }) => {
         <div className='TripList justify-content-center'>
             {
                 trips.map(elm => {
-                    return (elm.passengers?.length < elm.seats && <TripCard key={elm._id} searchTrips={searchTrips} loadOwnTrips={loadOwnTrips} {...elm} />)
+                    return (elm.passengers?.length < elm.seats && elm.trip_state === 'OPEN' && < TripCard key={elm._id} searchTrips={searchTrips} loadOwnTrips={loadOwnTrips} {...elm} />)
                 })
             }
         </div >

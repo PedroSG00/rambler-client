@@ -6,29 +6,50 @@ import { AuthContext } from '../../context/auth.context';
 import tripService from '../../services/trip.service';
 import EditTripForm from '../EditTripForm/EditTripForm';
 import { useLocation } from 'react-router-dom'
+import { MessageContext } from "../../context/userMessage.context"
 
 
 const TripCard = ({ origin_address, destination_address, owner, _id: trip_id, searchTrips, loadOwnTrips }) => {
+
+    const { setShowToast, setToastMessage } = useContext(MessageContext)
 
     const { user } = useContext(AuthContext)
     const location = useLocation()
 
     const [showModal, setShowModal] = useState(false)
+
+
     const closeModal = () => {
         setShowModal(false)
     }
     const [value, setValue] = useState('')
+    const [trip_state, setTripState] = useState('')
 
     const handleValue = e => {
         if (e.target.value === 'edit') {
             setShowModal(true)
             setValue('edit')
+        } else if (e.target.value === 'COMPLETED') {
+            setTripState('COMPLETED')
+            updateTripState()
+            loadOwnTrips()
         } else {
             setValue('delete')
             deleteTrip()
             loadOwnTrips()
             searchTrips && searchTrips()
         }
+    }
+
+
+    const updateTripState = () => {
+        tripService
+            .updateTripState(trip_id, trip_state)
+            .then(() => {
+                setShowToast(true)
+                setToastMessage('Trip completed')
+                loadOwnTrips()
+            })
     }
 
     const deleteTrip = () => {
@@ -53,6 +74,7 @@ const TripCard = ({ origin_address, destination_address, owner, _id: trip_id, se
                         <Button className='me-2'>Show Details</Button>
                     </Link>
                     {user && ((owner._id === user._id && location.pathname !== '/trips/list' && location.pathname !== `/trips/${trip_id}`) && <>
+                        <Button value='COMPLETED' onClick={handleValue} className='me-2'>Complete trip</Button>
                         <Button value='edit' onClick={handleValue} className='me-2'>Edit Trip</Button>
                         <Button value='delete' onClick={handleValue} className='me-2'>Delete trip</Button>
                     </>)}
