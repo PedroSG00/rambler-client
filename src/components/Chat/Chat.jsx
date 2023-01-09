@@ -22,7 +22,7 @@ const Chat = ({ chatId }) => {
         chatService
             .getChatDetails(chatId)
             .then(({ data }) => {
-                console.log('-details-----------------------', data)
+                // console.log('-details-----------------------', data)
                 setMessages(data.messages)
             })
             .catch(error => console.log(error))
@@ -48,7 +48,7 @@ const Chat = ({ chatId }) => {
 
             socket.emit("sendMessage", messageData)
 
-            console.log('eeeeeeeeeeeeeeeeeee', messageData)
+            // console.log('eeeeeeeeeeeeeeeeeee', messageData)
 
             const { time, text, room } = messageData
 

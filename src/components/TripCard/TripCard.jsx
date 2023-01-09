@@ -81,9 +81,9 @@ const TripCard = ({ origin_address, destination_address, owner, _id: trip_id, se
                     {user && ((owner._id === user._id && location.pathname !== '/trips/list' && location.pathname !== `/trips/${trip_id}`) && <>
                         <>
                             {newEventKey !== 'Trip History' && <>
-                                <Button value='COMPLETED' name='trip_state' onClick={handleValue} className='me-2'>Complete trip</Button>
-                                <Button value='edit' onClick={handleValue} className='me-2'>Edit Trip</Button>
-                                <Button value='delete' onClick={handleValue} className='me-2'>Delete trip</Button>
+                                <Button value='COMPLETED' name='trip_state' onClick={handleValue} className='me-2 complete-button'>Complete trip</Button>
+                                {/* <Button value='edit' onClick={handleValue} className='me-2'>Edit Trip</Button> */}
+                                <Button value='delete' onClick={handleValue} className='me-2 delete-button'>Delete trip</Button>
                             </>
                             }
                         </>
@@ -91,14 +91,14 @@ const TripCard = ({ origin_address, destination_address, owner, _id: trip_id, se
                 </Card.Body>
             </Card>
 
-            <Modal show={showModal} onHide={closeModal}>
+            {/* <Modal show={showModal} onHide={closeModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit Trip</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <EditTripForm trip_id={trip_id} searchTrips={searchTrips} loadOwnTrips={loadOwnTrips} closeModal={closeModal} />
                 </Modal.Body>
-            </Modal>
+            </Modal> */}
         </>
     );
 }

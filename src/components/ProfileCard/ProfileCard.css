@@ -7,3 +7,12 @@
     height: 400px;
     border-radius: 50%;
 }
+
+.delete-button {
+    background-color: #d5bf1c !important;
+}
+
+.complete-button {
+    background-color: #d5bf1c !important;
+
+}

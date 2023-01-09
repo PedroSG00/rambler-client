@@ -24,10 +24,10 @@ const ProfileCard = () => {
                     <ListGroup.Item>Age: {age}</ListGroup.Item>
                     <ListGroup.Item>Gender: {gender}</ListGroup.Item>
                 </ListGroup>
-                <Card.Body>
+                {/* <Card.Body>
                     <Card.Link href="#">Edit profile</Card.Link>
                     <Card.Link href="#">Delete profile</Card.Link>
-                </Card.Body>
+                </Card.Body> */}
             </div>
 
         </Card>

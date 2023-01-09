@@ -39,7 +39,6 @@ class TripService {
 
     updateTripState = (tripID, trip_state) => this.api.put(`/${tripID}/update-state`, trip_state)
 
-
     deleteTrip = (tripID) => this.api.delete(`/${tripID}/delete`)
 
     searchTrip(origin_lat,
