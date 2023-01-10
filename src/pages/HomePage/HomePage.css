@@ -5,7 +5,7 @@
 }
 
 #video {
-    height: 85vh;
+    height: 70vh;
     width: 100%;
     object-fit: cover;
     z-index: -1;
@@ -14,5 +14,19 @@
 
 .search-bar {
     position: absolute;
+    width: 100%;
     top: 50%;
+    left: 1.5%;
 }
+
+.head {
+    position: absolute;
+    width: 60%;
+    text-align: center;
+    color: aliceblue;
+    background-color: rgba(213, 191, 28, .5);
+    left: 20%;
+    top: 30%;
+}
+
+.description-section {}
