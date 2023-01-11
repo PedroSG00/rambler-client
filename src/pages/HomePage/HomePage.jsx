@@ -5,6 +5,7 @@ import Loader from '../../components/Loader/Loader'
 import { Row, Col, Container, Carousel } from 'react-bootstrap'
 import { Car, Globe } from 'phosphor-react'
 import { useState } from 'react'
+
 const HomePage = () => {
 
     const [index, setIndex] = useState(0);

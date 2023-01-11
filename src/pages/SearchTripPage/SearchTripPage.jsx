@@ -129,7 +129,7 @@ const SearchTripPage = () => {
 
                     </Col>
                     <Col md={5}>
-                        {trips ? trips.length !== 0 && <TripList trips={trips} searchTrips={searchTrips} /> : <Loader />}
+                        {trips && trips.length !== 0 ? <TripList trips={trips} searchTrips={searchTrips} /> : <h2 className='NoTripsMessage text-secondary'>There aren't trips for this search.</h2>}
                     </Col>
                 </Row>
             </Container>

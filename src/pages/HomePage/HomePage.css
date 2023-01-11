@@ -14,9 +14,7 @@
 
 .search-bar {
     position: absolute;
-    width: 100%;
     top: 50%;
-    left: 1.5%;
 }
 
 .head {
@@ -28,5 +26,3 @@
     left: 20%;
     top: 30%;
 }
-
-.description-section {}

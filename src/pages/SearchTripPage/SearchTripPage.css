@@ -1,3 +1,7 @@
 .SearchTripPage {
     height: 83vh;
 }
+
+.NoTripsMessage {
+    margin-top: 100px;
+}
