@@ -11,7 +11,7 @@ const ChatList = ({ chatList, setChatId }) => {
         <div>
             <h3>My chat list</h3>
 
-            <div style={{ "maxHeight": "66vh", "overflow": "scroll", "overflowX": "hidden" }}>
+            {chatList?.length !== 0 ? <div style={{ "maxHeight": "66vh", "overflow": "scroll", "overflowX": "hidden" }}>
                 {chatList?.map(chat => {
 
                     const { trip, users, _id, driver } = chat
@@ -29,7 +29,7 @@ const ChatList = ({ chatList, setChatId }) => {
                         </div>
                     )
                 })}
-            </div>
+            </div> : <p className='fs-5 text-secondary'>There are no chats yet, create a trip or join one to start chatting.</p>}
 
         </ div>
     )

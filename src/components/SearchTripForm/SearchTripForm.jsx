@@ -38,9 +38,9 @@ function SearchTripForm() {
         <>{isLoaded ?
             <Container fluid className="search-bar">
                 <Row className='justify-content-center'>
-                    <Col md={{ span: 6, offset: 2 }}>
+                    <Col md={{ span: 6 }}>
                         <Form onSubmit={handleSubmit}>
-                            <InputGroup>
+                            <InputGroup className='d-flex justify-content-center'>
                                 <PlacesAutocomplete placeholder={'Origin'} kind='origin_address' handleMarkers={handleMarkers}></PlacesAutocomplete>
                                 <PlacesAutocomplete placeholder={'Destination'} kind='destination_address' handleMarkers={handleMarkers}></PlacesAutocomplete>
                                 <Button className='input-group-end' type='submit'>

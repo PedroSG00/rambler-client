@@ -56,8 +56,8 @@ const CarList = () => {
             {
                 <>
                     <Button value='create' className='d-grid' onClick={handleValue}>Add Car</Button>
-                    {
-                        userCars.map(elm => <CarCard key={elm._id} {...elm} loadUserCars={loadUserCars} />)
+                    {userCars?.length !== 0 ?
+                        userCars.map(elm => <CarCard key={elm._id} {...elm} loadUserCars={loadUserCars} />) : <p className='fs-4 text-secondary text-center'>There are no cars for now, create one.</p>
                     }
                 </>
 

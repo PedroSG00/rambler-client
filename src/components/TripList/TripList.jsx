@@ -24,10 +24,10 @@ const TripList = ({ trips, loadOwnTrips, searchTrips }) => {
                     className="mb-3 justify-content-around"
                 >
                     <Tab eventKey="My trips" title="My trips">
-                        {
+                        {trips?.length !== 0 ?
                             trips.map(elm => {
                                 return ((elm.passengers?.length < elm.seats && elm.trip_state === 'OPEN') && < TripCard key={elm._id} searchTrips={searchTrips} loadOwnTrips={loadOwnTrips} {...elm} />)
-                            })
+                            }) : <p className='fs-4 text-secondary text-center'>For the time being, there are no ongoing trips.</p>
                         }
                     </Tab>
                     <Tab eventKey="Trip History" title="Trip History">
